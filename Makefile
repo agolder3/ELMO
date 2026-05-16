@@ -41,7 +41,7 @@
 ##
 
 elmo : elmo.c
-	gcc -o elmo -O2 elmo.c -lm
+	gcc -o elmo -O1 elmo.c -lm
 
 clean :
 	rm -f elmo

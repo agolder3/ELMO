@@ -61,7 +61,7 @@ int main(void) {
 
 
     #ifdef AUTON
-     LoadNForTVLA(&N);//Get N from ELMO
+     LoadN(&N);//Get N from ELMO
     #else
      N=NOTRACES;
     #endif

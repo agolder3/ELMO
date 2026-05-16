@@ -2,7 +2,19 @@ output/**
 *.elf
 *.bin
 *.map
+.map
 *.hex
 *.list
 *.d
 *.o
+.local_toolchains/
+*.venv*
+
+# ELMO compiled binary
+elmo
+
+# VCD output
+output.vcd
+
+# Generated documentation
+ELMODocumentation.md

@@ -177,8 +177,8 @@ dataflow *create_dataflow(dataflow *item){
     
     item -> next = malloc(sizeof(dataflow));
     #ifdef MEMORY_EXTENSION
-    prev_read=item -> readbus;
-    prev_write=item -> writebus;
+    unsigned int prev_read=item -> readbus;
+    unsigned int prev_write=item -> writebus;
     #endif
     item = item -> next;
     initialise_dataflow(item);
