@@ -91,8 +91,9 @@ echo "==> EXPERIMENT 1: AES DPA Trace Generation (200 traces)"
 echo "    Config: FIXEDVSRANDOM=off, MASKFLOW=off"
 echo "================================================================"
 # Disable FIXEDVSRANDOM for basic trace generation
-sed -i 's/^#define FIXEDVSRANDOM/\/\/#define FIXEDVSRANDOM/' elmodefines.h
-sed -i 's/^#define MASKFLOW/\/\/#define MASKFLOW/' elmodefines.h
+# Use $ anchor to match only the bare defines, not FIXEDVSRANDOMFAIL/FIXEDVSRANDOMFILE/MASKFLOWOUTPUTFILE
+sed -i 's/^#define FIXEDVSRANDOM$/\/\/#define FIXEDVSRANDOM/' elmodefines.h
+sed -i 's/^#define MASKFLOW$/\/\/#define MASKFLOW/' elmodefines.h
 make clean && make
 
 rm -f output/traces/* output/nonprofiledindexes/* output/asmoutput/*
@@ -112,7 +113,7 @@ echo "==> EXPERIMENT 2: AES Fixed vs Random (200 traces, quick test)"
 echo "    Config: FIXEDVSRANDOM=on, MASKFLOW=off"
 echo "================================================================"
 # Enable FIXEDVSRANDOM
-sed -i 's/^\/\/#define FIXEDVSRANDOM/#define FIXEDVSRANDOM/' elmodefines.h
+sed -i 's/^\/\/#define FIXEDVSRANDOM$/#define FIXEDVSRANDOM/' elmodefines.h
 make clean && make
 
 rm -f output/traces/* output/nonprofiledindexes/* output/asmoutput/*
@@ -132,7 +133,7 @@ echo "    Config: FIXEDVSRANDOM=on, MASKFLOW=on"
 echo "    NOTE: Full run uses 40000 traces. Using 200 for validation."
 echo "================================================================"
 # Enable MASKFLOW
-sed -i 's/^\/\/#define MASKFLOW/#define MASKFLOW/' elmodefines.h
+sed -i 's/^\/\/#define MASKFLOW$/#define MASKFLOW/' elmodefines.h
 make clean && make
 
 rm -f output/traces/* output/nonprofiledindexes/* output/asmoutput/*
@@ -150,7 +151,7 @@ echo ""
 # 6. Restore default elmodefines.h config and rebuild
 ###############################################################################
 echo "==> Restoring default elmodefines.h (FIXEDVSRANDOM=on, MASKFLOW=off)..."
-sed -i 's/^#define MASKFLOW/\/\/#define MASKFLOW/' elmodefines.h
+sed -i 's/^#define MASKFLOW$/\/\/#define MASKFLOW/' elmodefines.h
 make clean && make
 
 echo ""
